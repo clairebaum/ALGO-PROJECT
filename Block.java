@@ -15,3 +15,4 @@ public abstract class Block{
 	}
 	
 	public abstract paint(Graphics g);
+}
