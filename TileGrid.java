@@ -10,3 +10,4 @@ public class TileGrid{
 		}
 	}
 }
+//we still have to add the Walls and add the centre "win" tile
