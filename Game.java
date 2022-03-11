@@ -3,13 +3,12 @@ import javax.swing.*
 
 public class Game extends JFrame implements Runnable{
 	
-	public static final String Name = "Name";
-	private JFrame frame; 
+	public static final String Name = "UFO ATTACK";
+	private frameGame mainFrame; 
 	
-	public Game() {
+	public Game(){
 		
-		frame = new JFrame(Name);
-		// graphical interface implementation
+		frameGame mainFrame = new frameGame(Name, 800, 600);
 		
 	}
 	
@@ -18,12 +17,12 @@ public class Game extends JFrame implements Runnable{
 		running = true;
 		new Thread(this).start();
 	}
-  
+	
 	// close the thread
 	public void stop(){
 		running =false;
 	}
-  
+	
 	// runs the thread <=> execution of the code that launches the game
 	public void run(){
 		
@@ -49,6 +48,5 @@ public class Game extends JFrame implements Runnable{
 	pubic void tick(){
 		frame.paint();
 	}
-  
-}
-		
+			
+}		
