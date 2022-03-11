@@ -1,0 +1,8 @@
+public class Hero extends Character {
+    
+    public Hero (int xini,int yini){ // for now there aren't any additional attribute but we can add them
+        super(xini,yini);
+    }
+
+    //I didn't override displacement because again there isn't any additional feature yet
+}
