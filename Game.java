@@ -46,7 +46,7 @@ public class Game extends JFrame implements Runnable{
 	}
 	
 	pubic void tick(){
-		frame.paint();
+		mainFrame.paint();
 	}
 			
 }		
