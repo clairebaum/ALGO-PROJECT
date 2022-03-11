@@ -2,14 +2,14 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.*;
 
-public class interfaceGame extends JFrame implements ActionListener{
-	// attributes of class interfaceGame
+public class frameGame extends JFrame implements ActionListener{
+	// attributes of class frameGame
 	public JPanel mainLabel;
 	public JPanel grid;
 	public JButton throwDice;
 	public JButton moveWall;
 	
-	public interfaceGame(String name, int width, int height) {
+	public frameGame(String name, int width, int height) {
 		super(name);
 		setSize(width, height);
 		setLocation(200,50);
