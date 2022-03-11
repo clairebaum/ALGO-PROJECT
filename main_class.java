@@ -1,2 +1,4 @@
 public static void main(String[] args) {
 		interfaceGame i = new interfaceGame("UFO ATTACK", 800, 600);
+		
+}
