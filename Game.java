@@ -1,14 +1,15 @@
-import java.awt.*
-import javax.swing.*
+import java.awt.*;
+import javax.swing.*;
 
 public class Game extends JFrame implements Runnable{
 	
 	public static final String Name = "UFO ATTACK";
-	private frameGame mainFrame; 
+	private frameGame mainFrame = new frameGame(Name, 800, 600); 
+	private boolean running =false; 
 	
 	public Game(){
 		
-		frameGame mainFrame = new frameGame(Name, 800, 600);
+		
 		
 	}
 	
@@ -45,8 +46,8 @@ public class Game extends JFrame implements Runnable{
 		}
 	}
 	
-	pubic void tick(){
-		mainFrame.paint();
+	public void tick(){
+		mainFrame.repaint();
 	}
 			
-}		
+}
