@@ -8,9 +8,12 @@ public class frameGame extends JFrame implements ActionListener{
 	public JPanel grid;
 	public JButton throwDice;
 	public JButton moveWall;
+    public Tile[][] map;
 	
-	public frameGame(String name, int width, int height) {
+	public frameGame(String name, int width, int height, Tile[][] map) {
 		super(name);
+        this.map=map;
+
 		setSize(width, height);
 		setLocation(200,50);
 
@@ -49,3 +52,4 @@ public class frameGame extends JFrame implements ActionListener{
 	}
 	
 }
+
