@@ -49,6 +49,9 @@ public class frameGame extends JFrame implements ActionListener{
 
 
 	}
+	public void paint(Graphics g){
+		tileGrid.draw();
+	}
 	
 }
 
