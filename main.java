@@ -1,5 +1,7 @@
 public class main{
 	public static void main(String[] args){
-		new Game().start();
+		Game game = new Game();
+		game.start();
+		game.run();
 	}
 }
