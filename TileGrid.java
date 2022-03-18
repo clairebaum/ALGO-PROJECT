@@ -5,7 +5,7 @@ public class TileGrid{
 		map = new Tile[20][20];
 		for(int i = 0; i<map.length; i++){
 			for(int j =0 ; j<map[i].length, j++){
-				map[][] = new Tile(i*10 , j*10, i, j);
+				map[][] = new Ground(i*10 , j*10, i, j);
 			}
 		}
 	}
