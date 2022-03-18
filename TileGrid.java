@@ -11,11 +11,11 @@ public class TileGrid{
 		}
 	}
 	
-	protected void draw(){
+	public void draw(){
 		for(int i = 0; i<map.length; i++){
-			for(int j =0 ; j<map[i].length, j++){
+			for(int j =0 ; j<map[i].length; j++){
 				Tile t = map[i][j];
-				t.paint();
+				t.paint(Graphics g);
 			}
 		}
 	}		
