@@ -9,9 +9,12 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public JPanel grid;
 	public JButton throwDice;
 	public JButton moveWall;
+	public TileGrid theTileGrid;
+
 	
-	public frameGame(String name, int width, int height) {
+	public frameGame(String name, int width, int height, TileGrid aTileGrid) {
 		super(name);
+		this.theTileGrid = aTileGrid;
 		setSize(width, height);
 		setLocation(200,50);
 
@@ -78,5 +81,8 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public void keyTyped(KeyEvent ke){
 		System.out.println();
 	}
-}
 
+	public void repaint(){
+		this.theTileGrid.draw();
+	}
+}
