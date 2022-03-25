@@ -1,4 +1,4 @@
-import javax.awt.*;
+import java.awt.*;
 
 
 public class Ground extends Tile{
