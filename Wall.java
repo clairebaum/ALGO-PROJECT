@@ -1,7 +1,7 @@
 import java.awt.*;
 
 
-public class Wall extends Block{
+public class Wall extends Tile{
 	
 	public Wall(int x, int y , int height, int width){
 	super(x, y, height, width); 
