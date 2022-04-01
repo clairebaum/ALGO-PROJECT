@@ -1,6 +1,5 @@
 import java.awt.*;
 
-
 public class Ground extends Tile{
 	
 	public Ground(int x, int y , int height, int width){
@@ -8,10 +7,12 @@ public class Ground extends Tile{
 	}
 	
 	public void paint(Graphics g){
-		g.setColor(color.green);
+		g.setColor(Color.yellow);
+		g.fillRect(this.posX, this.posY, this.height, this.width);
+		g.setColor(Color.green);
 		g.drawRect(this.posX, this.posY, this.height, this.width);
-		
 	}
 	
+}
 	
 }
