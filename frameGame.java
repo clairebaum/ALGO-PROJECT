@@ -37,15 +37,15 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall.addKeyListener(this);
 		
 		//JLabel with the Image Icon of the hero
-		HeroIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/avatar.png");
+		HeroIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/Hero.png");
         	HeroLabel= new JLabel(HeroIcon);
-    		HeroLabel.setSize(200,200);
+    		HeroLabel.setSize(30,30);
 		HeroLabel.setLocation(0,0);
 		
 		//JLabel with the Image Icon of the UFO
 		UFOIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/UFO.png");
 		UFOLabel= new JLabel(UFOIcon);
-		UFOLabel.setSize(100,100);
+		UFOLabel.setSize(45,45);
 		UFOLabel.setLocation(300,300);
 
 		// JPanel that will contain the grid
