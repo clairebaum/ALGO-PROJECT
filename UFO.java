@@ -3,6 +3,7 @@ public class UFO extends Character {
 
     public UFO (int xini,int yini){ 
         super(xini,yini);
+        this.player = 2;
     }
 
     public void winOrLose (int xHero, int yHero){
