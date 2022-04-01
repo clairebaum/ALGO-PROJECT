@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.*;
+import java.awt.*;
 
 
 public class frameGame extends JFrame implements ActionListener, KeyListener{
 	// attributes of class frameGame
 	public JPanel mainLabel;
-	public JPanel grid;
+	public gridPanel grid;
 	public JButton throwDice;
 	public JButton moveWall;
 	public TileGrid theTileGrid;
@@ -32,10 +33,10 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall.addKeyListener(this);
 
 		// JPanel that will contain the grid
-		grid=new JPanel();
+		grid=new gridPanel(this.theTileGrid);
 		grid.setLayout(null);
 		grid.setBounds(200, 60, 500,400);
-		grid.setBackground(Color.CYAN);
+		grid.setBackground(Color.pink);
 
 		// JPanel that will contain everything (grid, buttons...)
 		mainLabel= new JPanel();
@@ -75,14 +76,11 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		else {
 			moveWall.setBackground(Color.GREEN);
 		}
-		repaint();
+		this.grid.repaint();
 	}
 	
 	public void keyTyped(KeyEvent ke){
 		System.out.println();
 	}
 
-	public void repaint(){
-		this.theTileGrid.draw();
-	}
 }
