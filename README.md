@@ -1,3 +1,5 @@
 # ALGO-PROJECT
 
-Je propose ce changement
+Pour les couleurs:
+
+https://www.w3schools.com/colors/colors_picker.asp
