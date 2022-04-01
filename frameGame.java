@@ -16,7 +16,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	private JLabel UFOLabel;
 
 	
-	public frameGame(String name, int width, int height, TileGrid aTileGrid) {
+	public frameGame(String name, int width, int height) {
 		super(name);
 		this.theTileGrid = aTileGrid;
 		setSize(width, height);
