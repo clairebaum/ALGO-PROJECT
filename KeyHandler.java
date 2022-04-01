@@ -5,17 +5,17 @@ import java.awt.event.KeyEvent;
 
 public class KeyHandler implements KeyListener {
 
-  public boolean upPressed, leftPressed, downPressed, rightPressed, zPressed, qPressed, sPressed, dPressed;
+  public boolean pressed, upPressed, leftPressed, downPressed, rightPressed, zPressed, qPressed, sPressed, dPressed;
 
-
-  @Override
+	
+  
   public void keyTyped(KeyEvent e) {
 
   }
 
-  @Override
   public void keyPressed(KeyEvent e) {
-    switch(e.getKeyCode()) {
+	pressed = true; 
+	switch(e.getKeyCode()) {
       case KeyEvent.VK_Z:
         zPressed = true;
         break;
@@ -46,6 +46,7 @@ public class KeyHandler implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
+	  pressed = false
     switch(e.getKeyCode()) {
       case KeyEvent.VK_Z:
         zPressed = false;
