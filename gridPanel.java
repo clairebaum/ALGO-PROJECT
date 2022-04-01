@@ -4,9 +4,9 @@ import java.awt.*;
 public class gridPanel extends JPanel {
     public TileGrid theTileGrid;
 
-    public gridPanel (TileGrid aTileGrid){
+    public gridPanel (){
         super();
-        this.theTileGrid = aTileGrid;
+        this.theTileGrid = new TileGrid();
     }
     public void paintComponent (Graphics g){ 
         super.paintComponent(g);
