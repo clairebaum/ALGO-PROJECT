@@ -12,7 +12,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public JButton moveWall;
 	private ImageIcon HeroIcon;
 	private ImageIcon UFOIcon;
-    	private JLabel HeroLabel;
+    private JLabel HeroLabel;
 	private JLabel UFOLabel;
 
 	
@@ -20,7 +20,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		super(name);
 		setSize(width, height);
 		setLocation(200,5);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// button to throw the dice
 		throwDice= new JButton("Throw Dice");
@@ -34,14 +34,13 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall.addKeyListener(this);
 		
 		//JLabel with the Image Icon of the hero
-		HeroIcon= new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet/avatar.png");
-		HeroLabel= new JLabel(HeroIcon);
-		
-		HeroLabel.setSize(30,30);
+		HeroIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/Hero.png");
+        HeroLabel= new JLabel(HeroIcon);
+    	HeroLabel.setSize(30,30);
 		HeroLabel.setLocation(0,0);
 		
 		//JLabel with the Image Icon of the UFO
-		UFOIcon= new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet/UFO.png");
+		UFOIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/UFO.png");
 		UFOLabel= new JLabel(UFOIcon);
 		UFOLabel.setSize(45,45);
 		UFOLabel.setLocation(300,300);
@@ -49,7 +48,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		// JPanel that will contain the grid
 		grid=new gridPanel();
 		grid.setLayout(null);
-		grid.setBounds(200, 20, 600,600);
+		grid.setBounds(200, 60, 450,450);
 		grid.setBackground(Color.pink);
 		grid.add(HeroLabel);
 		grid.add(UFOLabel);
@@ -60,8 +59,8 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		mainLabel.add(throwDice);
 		mainLabel.add(moveWall);
 		mainLabel.add(grid);
-		mainLabel.setBounds(0,0,900,700);
-		mainLabel.setBackground(Color.YELLOW);
+		mainLabel.setBounds(0,0,800,600);
+		mainLabel.setBackground(new Color(255, 255, 153));
 		
 
 		add(mainLabel);
@@ -69,6 +68,8 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		setVisible(true);
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
+
+
 	}
 	
 	public void actionPerformed(ActionEvent e){
