@@ -3,20 +3,6 @@ import javax.swing.*;
 
 public class Game implements Runnable{
 	public static final String Name = "UFO ATTACK";
-	private frameGame mainFrame = new frameGame(Name, 800, 600); 
-	private boolean running =false; 
-	
-	public Game(){
-	}
-	
-	// starts the thread to launch the game 
-	public void start(){
-		running = true;
-import java.awt.*;
-import javax.swing.*;
-
-public class Game implements Runnable{
-	public static final String Name = "UFO ATTACK";
 	private frameGame mainFrame = new frameGame(Name, 900, 680); 
 	private boolean running =false; 
 	
