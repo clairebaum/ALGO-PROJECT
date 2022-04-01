@@ -11,6 +11,10 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public JButton throwDice;
 	public JButton moveWall;
 	public TileGrid theTileGrid;
+	private ImageIcon HeroIcon;
+	private ImageIcon UFOIcon;
+    	private JLabel HeroLabel;
+	private JLabel UFOLabel;
 
 	
 	public frameGame(String name, int width, int height, TileGrid aTileGrid) {
@@ -31,12 +35,26 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall.setBounds(10,260,150,40);
 		moveWall.addActionListener(this);
 		moveWall.addKeyListener(this);
+		
+		//JLabel with the Image Icon of the hero
+		HeroIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/avatar.png");
+        	HeroLabel= new JLabel(HeroIcon);
+    		HeroLabel.setSize(200,200);
+		HeroLabel.setLocation(0,0);
+		
+		//JLabel with the Image Icon of the UFO
+		UFOIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/UFO.png");
+		UFOLabel= new JLabel(UFOIcon);
+		UFOLabel.setSize(100,100);
+		UFOLabel.setLocation(300,300);
 
 		// JPanel that will contain the grid
 		grid=new gridPanel(this.theTileGrid);
 		grid.setLayout(null);
 		grid.setBounds(200, 60, 500,400);
 		grid.setBackground(Color.pink);
+		grid.add(HeroLabel);
+		grid.add(UFOLabel);
 
 		// JPanel that will contain everything (grid, buttons...)
 		mainLabel= new JPanel();
