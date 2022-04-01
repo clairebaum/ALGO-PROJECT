@@ -18,7 +18,6 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	
 	public frameGame(String name, int width, int height) {
 		super(name);
-		this.theTileGrid = aTileGrid;
 		setSize(width, height);
 		setLocation(200,50);
 
