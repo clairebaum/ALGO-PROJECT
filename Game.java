@@ -12,8 +12,22 @@ public class Game implements Runnable{
 	// starts the thread to launch the game 
 	public void start(){
 		running = true;
+import java.awt.*;
+import javax.swing.*;
+
+public class Game implements Runnable{
+	public static final String Name = "UFO ATTACK";
+	private frameGame mainFrame = new frameGame(Name, 900, 680); 
+	private boolean running =false; 
+	
+	public Game(){
+	}
+	
+	// starts the thread to launch the game 
+	public void start(){
+		running = true;
 		new Thread(this).start();
-		mainFrame.grid.repaint();
+		//mainFrame.grid.repaint();
 	}
 	
 	// closes the thread
