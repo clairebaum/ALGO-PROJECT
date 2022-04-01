@@ -10,6 +10,7 @@ public class gridPanel extends JPanel {
     }
     public void paintComponent (Graphics g){ 
         super.paintComponent(g);
-        theTileGrid.draw(g);
+        theTileGrid.draw(g); 
     }
+    
 }
