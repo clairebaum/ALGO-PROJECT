@@ -49,7 +49,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		// JPanel that will contain the grid
 		grid=new gridPanel();
 		grid.setLayout(null);
-		grid.setBounds(200, 60, 500,400);
+		grid.setBounds(200, 60, 450,450);
 		grid.setBackground(Color.pink);
 		grid.add(HeroLabel);
 		grid.add(UFOLabel);
