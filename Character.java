@@ -5,7 +5,7 @@ public class Character implements KeyHandler{
     boolean hasWinned;
     KeyHandler control;
     int player ; 
-    boolean canMove;
+    boolean isPlaying;
     boolean upPressed, downPressed, leftPressed, rightPressed, pressed ; 
     
     
@@ -16,7 +16,7 @@ public class Character implements KeyHandler{
         this.availableDisplacement = 0;
         this.hasWinned = false;
         this.control = control; 
-        this.canMove = false ;
+        this.isPlaying= false ;
         
     }
     
