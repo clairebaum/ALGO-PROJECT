@@ -8,17 +8,16 @@ public class Game extends JFrame implements Runnable{
 	private boolean running =false; 
 	
 	public Game(){
-		
 	}
 	
 	// starts the thread to launch the game 
 	public void start(){
 		running = true;
 		new Thread(this).start();
-		mainFrame.repaint();
+		mainFrame.grid.repaint();
 	}
 	
-	// close the thread
+	// closes the thread
 	public void stop(){
 		running =false;
 	}
@@ -46,7 +45,7 @@ public class Game extends JFrame implements Runnable{
 	}
 	
 	public void tick(){
-		mainFrame.repaint();
+		mainFrame.grid.repaint();
 	}
 			
 }
