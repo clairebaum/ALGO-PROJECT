@@ -10,7 +10,6 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public gridPanel grid;
 	public JButton throwDice;
 	public JButton moveWall;
-	public TileGrid theTileGrid;
 	private ImageIcon HeroIcon;
 	private ImageIcon UFOIcon;
     	private JLabel HeroLabel;
@@ -49,7 +48,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		UFOLabel.setLocation(300,300);
 
 		// JPanel that will contain the grid
-		grid=new gridPanel(this.theTileGrid);
+		grid=new gridPanel();
 		grid.setLayout(null);
 		grid.setBounds(200, 60, 500,400);
 		grid.setBackground(Color.pink);
