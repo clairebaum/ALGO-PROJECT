@@ -19,8 +19,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public frameGame(String name, int width, int height) {
 		super(name);
 		setSize(width, height);
-		setLocation(200,50);
-
+		setLocation(200,5);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// button to throw the dice
@@ -35,13 +34,14 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall.addKeyListener(this);
 		
 		//JLabel with the Image Icon of the hero
-		HeroIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/Hero.png");
-        	HeroLabel= new JLabel(HeroIcon);
-    		HeroLabel.setSize(30,30);
+		HeroIcon= new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet/avatar.png");
+		HeroLabel= new JLabel(HeroIcon);
+		
+		HeroLabel.setSize(30,30);
 		HeroLabel.setLocation(0,0);
 		
 		//JLabel with the Image Icon of the UFO
-		UFOIcon= new ImageIcon("C:/Users/emeli/Documents/Documents/Higher education stuff/France/INSA documents/2A/Algo/Projet algo/Images/UFO.png");
+		UFOIcon= new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet/UFO.png");
 		UFOLabel= new JLabel(UFOIcon);
 		UFOLabel.setSize(45,45);
 		UFOLabel.setLocation(300,300);
@@ -49,7 +49,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		// JPanel that will contain the grid
 		grid=new gridPanel();
 		grid.setLayout(null);
-		grid.setBounds(200, 60, 450,450);
+		grid.setBounds(200, 20, 600,600);
 		grid.setBackground(Color.pink);
 		grid.add(HeroLabel);
 		grid.add(UFOLabel);
@@ -60,7 +60,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		mainLabel.add(throwDice);
 		mainLabel.add(moveWall);
 		mainLabel.add(grid);
-		mainLabel.setBounds(0,0,800,600);
+		mainLabel.setBounds(0,0,900,700);
 		mainLabel.setBackground(Color.YELLOW);
 		
 
@@ -69,8 +69,6 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		setVisible(true);
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-
-
 	}
 	
 	public void actionPerformed(ActionEvent e){
