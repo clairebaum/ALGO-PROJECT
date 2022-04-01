@@ -1,22 +1,21 @@
 import java.awt.*;
-public class TileGrid{
+public class TileGrid {
 
-	protected Tile[][] map;
-	
-		map = new Tile[30][30];
+	public Tile[][] map = new Ground[30][30];
+
+	public TileGrid(){		//contructor creates always the same map
 		for(int i = 0; i<map.length; i++){
-			for(int j =0 ; j<map[i].length, j++){
-				map[][] = new Tile(i*10 , j*10, 10, 10);
+			for(int j =0 ; j<map[i].length; j++){
+				map[i][j] = new Ground(i*10 , j*10, 10, 10); 
 			}
 		}
 	}
 	
-	public void draw(){
+	public void draw(Graphics g){
 		for(int i = 0; i<map.length; i++){
-			for(int j =0 ; j<map[i].length; j++){
-				Tile t = map[i][j];
-				t.paint(Graphics g);
+			for(int j = 0; j<map[i].length; j++){
+				map[i][j].paint(g);
 			}
 		}
-	}		
+	}
 }
