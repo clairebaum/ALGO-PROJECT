@@ -61,14 +61,14 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		mainLabel.add(moveWall);
 		mainLabel.add(grid);
 		mainLabel.setBounds(0,0,900,700);
-		mainLabel.setBackground(Color.YELLOW);
+		mainLabel.setBackground(new Color (255,255,153));
 		
 
 		add(mainLabel);
 
 		setVisible(true);
 		setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
+        	setFocusTraversalKeysEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
