@@ -47,3 +47,14 @@ public class TileGrid {
 		}
 	}
 	
+		
+	//displays the map
+	public void draw(Graphics g){
+		for(int i = 0; i<map.length; i++){
+			for(int j = 0; j<map[i].length; j++){
+				map[i][j].paint(g); //ground and wall tiles have different paint methods
+			}
+		}
+	}
+}
+	
