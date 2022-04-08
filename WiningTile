@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class WiningTile extends Tile {	
+public class WiningTile extends Ground {	
 	public WiningTile (int x, int y , int height, int width){
 	super(x, y, height, width); 
 	}
