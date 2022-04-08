@@ -41,7 +41,7 @@ public class TileGrid {
 				} else if(binaryMap[i][j]==1){
 					map[i][j] = new Wall(i*20, j*20, 20, 20); 
 				} else if(binaryMap[i][j]==2){
-					map[i][j] = new WiningTile(i*20, j*20, 20, 20);
+					map[i][j] = new WinningTile(i*20, j*20, 20, 20);
 				}
 			}
 		}
