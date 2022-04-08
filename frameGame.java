@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 
-public class frameGame extends JFrame implements ActionListener, KeyListener{
+public class frameGame extends JFrame implements ActionListener {
 	// attributes of class frameGame
 	public JPanel mainLabel;
 	public gridPanel grid;
@@ -12,8 +12,10 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 	public JButton moveWall;
 	private ImageIcon HeroIcon;
 	private ImageIcon UFOIcon;
-    	private JLabel HeroLabel;
+    private JLabel HeroLabel;
 	private JLabel UFOLabel;
+	public boolean moveWallClicked;
+	public boolean throwDiceClicked;
 
 	
 	public frameGame(String name, int width, int height) {
@@ -31,7 +33,7 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		moveWall= new JButton("Move Wall");
 		moveWall.setBounds(10,260,150,40);
 		moveWall.addActionListener(this);
-		moveWall.addKeyListener(this);
+		
 		
 		//JLabel with the Image Icon of the hero
 		HeroIcon= new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet/avatar.png");
@@ -61,40 +63,32 @@ public class frameGame extends JFrame implements ActionListener, KeyListener{
 		mainLabel.add(moveWall);
 		mainLabel.add(grid);
 		mainLabel.setBounds(0,0,900,700);
-		mainLabel.setBackground(new Color (255,255,153));
+		mainLabel.setBackground(Color.YELLOW);
 		
 
 		add(mainLabel);
 
 		setVisible(true);
 		setFocusable(true);
-        	setFocusTraversalKeysEnabled(false);
+        setFocusTraversalKeysEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		moveWall.setBackground(Color.MAGENTA);
+		if(e.getSource() == throwDice) {
+			throwDiceClicked = true ;
+	    } else if (e.getSource() == moveWall){
+			moveWallClicked = true ;
+		}
 	}
 	
-	public void keyPressed(KeyEvent ke){
-		System.out.println();
+	public void updateCharacterIcon(int nb, int x, int y){
+		if (nb = 1){
+			HeroLabel.setLocation(x,y);
+		} else if (nb = 2){
+			UFOLabel.setLocation(x,y);
+		}
 	}
+		
 	
-	public void keyReleased(KeyEvent ke){
-		if (ke.getKeyCode() == KeyEvent.VK_LEFT){
-			moveWall.setBackground(Color.MAGENTA);
-			
-		}
-		else if(ke.getKeyCode() == KeyEvent.VK_UP){
-			moveWall.setBackground(Color.BLACK);
-		}
-		else {
-			moveWall.setBackground(Color.GREEN);
-		}
-		this.grid.repaint();
-	}
-	
-	public void keyTyped(KeyEvent ke){
-		System.out.println();
-	}
 
 }
