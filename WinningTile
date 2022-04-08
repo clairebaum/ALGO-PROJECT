@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public class WiningTile extends Ground {	
-	public WiningTile (int x, int y , int height, int width){
+public class WinningTile extends Ground {	
+	public WinningTile (int x, int y , int height, int width){
 	super(x, y, height, width); 
 	}
 	
