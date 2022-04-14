@@ -1,7 +1,10 @@
-public class main{
+public class mainclass{
 	public static void main(String[] args){
-		Game game = new Game();
+		GameUpdate gameUp = new GameUpdate(); // creates the thread which updates the frame
+		Game game = new Game(); // creates the thread which launches the game mechanism
+		gameUp.start();
 		game.start();
+		gameUp.run();
 		game.run();
 	}
 }
