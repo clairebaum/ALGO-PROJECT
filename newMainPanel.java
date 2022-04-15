@@ -196,4 +196,3 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 }	
 	
 		
-		
