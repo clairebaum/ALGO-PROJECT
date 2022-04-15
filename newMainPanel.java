@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import static java.awt.GraphicsDevice.WindowTranslucency.*;
 
 public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	
@@ -7,7 +9,6 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	private boolean running =false;
 	public Hero player1= new Hero(0,0);
 	public UFO player2= new UFO(0,0);
-	public static final String Name = "UFO ATTACK";
 	public Thread gameThread ;
 	
 	// attributes relative to the gridPanel
@@ -19,7 +20,7 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	private JLabel UFOLabel;
 	
 	//atributes relative to the main Panel
-	public JButton throwDice;
+	public JButton throwDice ;
 	public JButton moveWall;
 	public boolean moveWallClicked;
 	public boolean throwDiceClicked;
@@ -28,16 +29,14 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	//constructor
     public newMainPanel (){
         super();
-        this.theTileGrid = new TileGrid();
+        
         
         // graphical component of the main Panel
-		
+		this.setVisible(true);
 		this.setLayout(null);
 		this.setBounds(0,0,900,700);
 		this.setBackground(new Color (255,255,153));
-		this.add(throwDice);
-		this.add(moveWall);
-		this.add(grid);
+		
 		
         
         // button to throw the dice
@@ -53,9 +52,8 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
         //graphical component of the grid
 		grid.setLayout(null);
 		grid.setBounds(200, 20, 600,600);
-		grid.setBackground(Color.pink);
-		grid.add(HeroLabel);
-		grid.add(UFOLabel);
+		grid.setBackground(new Color (0,0,0,0));
+        this.theTileGrid = new TileGrid(grid.getX(),grid.getY());
         
         //JLabel with the Image Icon of the hero
 		HeroIcon= new ImageIcon("C:/Users/gadis/Desktop/INSA Lyon/FIMI 2A/ALGO/projet/Icon/Hero.png");
@@ -68,6 +66,16 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 		UFOLabel= new JLabel(UFOIcon);
 		UFOLabel.setSize(45,45);
 		UFOLabel.setLocation(300,300);
+		
+		// add component to main panel
+		this.add(throwDice);
+		this.add(moveWall);
+		this.add(grid);
+		grid.add(HeroLabel);
+		grid.add(UFOLabel);
+		
+		
+        
 		
 		//thread creation
 		gameThread = new Thread(this);
@@ -160,11 +168,16 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
     //repaint function
     public void paintComponent(Graphics g) {
 		
+		Graphics2D g2 = (Graphics2D)g;
+		
+		
+		
 		//graphical component of the grid
-		super.paintComponent(g);
+		super.paintComponent(g2);
+		grid.setBackground(new Color (0,0,0,0));
 		
 		//graphical component of the TileGrid
-		theTileGrid.draw(g);
+		theTileGrid.draw(g2);
 		
 		//graphical component of the characters
 		HeroLabel.setLocation(player1.getX(), player1.getY());
@@ -181,5 +194,6 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 		}
 	}
 }	
+	
 		
 		
