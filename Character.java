@@ -1,11 +1,11 @@
-public class Character implements KeyHandler{
+public class Character{
     int x;
     int y;
     int availableDisplacement;
+    int availableAction ; 
     boolean hasWinned;
-    KeyHandler control;
-    int player ; 
-    boolean isPlaying;
+    KeyHandler control = new KeyHandler();
+    int player ;
     boolean upPressed, downPressed, leftPressed, rightPressed, pressed ; 
     
     
@@ -13,10 +13,10 @@ public class Character implements KeyHandler{
     public Character(int xini,int yini){ //constructor setting the initial position
         this.x=xini;
         this.y=yini;
-        this.availableDisplacement = 0;
+        this.availableDisplacement = -1;
         this.hasWinned = false;
-        this.control = control; 
-        this.isPlaying= false ;
+        this.control = control;
+        this.availableAction = -1;
         
     }
     
@@ -38,18 +38,20 @@ public class Character implements KeyHandler{
     */
     public void updatePosition() {
 	
-		switch{
-			case upPressed:
+		if (upPressed){
 				this.y += 1;
-			break ;
-			case downPressed :
+		}
+		
+		if (downPressed){
 				this.y += -1;
-			case rightPressed:
+		}
+		
+		if(rightPressed){
 				this.x += 1;
-			break ;
-			case downPressed :
+		}
+		
+		if (downPressed){
 				this.x += -1;	
-			break;
 		}
 	}
 	
@@ -60,26 +62,25 @@ public class Character implements KeyHandler{
 	leftPressed = false;
 	rightPressed = false;
 	pressed = false ;
+
+	pressed = control.pressed;
 	
-		if (canMove){ // check if player is allowed to move
-		pressed = control.pressed;
+		if(player == 1 && pressed) { // controls for Hero
 		
-			if(player == 1 && pressed) { // controls for Hero
-			
-			upPressed = control.zPressed;
-			downPressed = control.sPressed;
-			leftPressed = control.qPressed;
-			rightPressed = control.dPressed;
-		  
-			} else if(player == 2 && pressed) { // controls for UFO
-			 
-			upPressed = control.upPressed;
-			downPressed = control.downPressed;
-			leftPressed = control.leftPressed;
-			rightPressed = control.rightPressed;
-		  
-			}
+		upPressed = control.zPressed;
+		downPressed = control.sPressed;
+		leftPressed = control.qPressed;
+		rightPressed = control.dPressed;
+	  
+		} else if(player == 2 && pressed) { // controls for UFO
+		 
+		upPressed = control.upPressed;
+		downPressed = control.downPressed;
+		leftPressed = control.leftPressed;
+		rightPressed = control.rightPressed;
+	  
 		}
 
 	}
+	
 }
