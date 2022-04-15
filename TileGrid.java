@@ -1,6 +1,7 @@
 import java.awt.*;
-public class TileGrid {
-
+import javax.swing.*;
+public class TileGrid{
+	
 	public Tile[][] map = new Tile[30][30];
 	int[][] binaryMap=                     {{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
 						{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -33,22 +34,21 @@ public class TileGrid {
 						{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 						{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}};
 
-	public TileGrid(){		//contructor creates always the same map
+	public TileGrid(int x, int y){	//contructor creates always the same map, x and y the values of the panel which contains the map
+		
 		for(int i = 0; i<map.length; i++){
 			for(int j=0 ; j<map.length; j++){
 				if (binaryMap[i][j]==0){
-					map[i][j] = new Ground(i*20, j*20, 20, 20); 
+					map[i][j] = new Ground(i*20+x, j*20+y, 20, 20); // every tile is shifted with an offset x and y so the map is printed inside the panel
 				} else if(binaryMap[i][j]==1){
-					map[i][j] = new Wall(i*20, j*20, 20, 20); 
+					map[i][j] = new Wall(i*20+x, j*20+y, 20, 20); 
 				} else if(binaryMap[i][j]==2){
-					map[i][j] = new WinningTile(i*20, j*20, 20, 20);
+					map[i][j] = new WiningTile(i*20+x, j*20+y, 20, 20);
 				}
 			}
 		}
 	}
 	
-		
-	//displays the map
 	public void draw(Graphics g){
 		for(int i = 0; i<map.length; i++){
 			for(int j = 0; j<map[i].length; j++){
@@ -56,5 +56,6 @@ public class TileGrid {
 			}
 		}
 	}
+	
 }
 	
