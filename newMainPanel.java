@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import static java.awt.GraphicsDevice.WindowTranslucency.*;
 
 public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	
@@ -12,11 +11,10 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	public Thread gameThread ;
 	
 	// attributes relative to the gridPanel
-	public Panel grid = new Panel();
-    public TileGrid theTileGrid;
-    private ImageIcon HeroIcon;
+    	public TileGrid theTileGrid;
+    	private ImageIcon HeroIcon;
 	private ImageIcon UFOIcon;
-    private JLabel HeroLabel;
+    	private JLabel HeroLabel;
 	private JLabel UFOLabel;
 	
 	//atributes relative to the main Panel
@@ -27,7 +25,7 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 	
 	
 	//constructor
-    public newMainPanel (){
+   	public newMainPanel (){
         super();
         
         
@@ -44,35 +42,31 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 		throwDice.setBounds(10,200,150,40);
 		throwDice.addActionListener(this);
 
-		// button to move a wall
+	// button to move a wall
 		moveWall= new JButton("Move Wall");
 		moveWall.setBounds(10,260,150,40);
 		moveWall.addActionListener(this);
         
-        //graphical component of the grid
-		grid.setLayout(null);
-		grid.setBounds(200, 20, 600,600);
-		grid.setBackground(new Color (0,0,0,0));
-        this.theTileGrid = new TileGrid(grid.getX(),grid.getY());
+        // TileGrid
+       		 this.theTileGrid = new TileGrid(grid.getX(),grid.getY());
         
-        //JLabel with the Image Icon of the hero
+        // JLabel with the Image Icon of the hero
 		HeroIcon= new ImageIcon("C:/Users/gadis/Desktop/INSA Lyon/FIMI 2A/ALGO/projet/Icon/Hero.png");
 		HeroLabel= new JLabel(HeroIcon);
 		HeroLabel.setSize(30,30);
 		HeroLabel.setLocation(0,0);
 		
-		//JLabel with the Image Icon of the UFO
+	//JLabel with the Image Icon of the UFO
 		UFOIcon= new ImageIcon("C:/Users/gadis/Desktop/INSA Lyon/FIMI 2A/ALGO/projet/Icon/UFO.png");
 		UFOLabel= new JLabel(UFOIcon);
 		UFOLabel.setSize(45,45);
 		UFOLabel.setLocation(300,300);
 		
-		// add component to main panel
+	// add component to main panel
 		this.add(throwDice);
 		this.add(moveWall);
-		this.add(grid);
-		grid.add(HeroLabel);
-		grid.add(UFOLabel);
+		this.add(HeroLabel);
+		this.add(UFOLabel);
 		
 		
         
@@ -180,8 +174,8 @@ public class newMainPanel extends JPanel implements Runnable, ActionListener{
 		theTileGrid.draw(g2);
 		
 		//graphical component of the characters
-		HeroLabel.setLocation(player1.getX(), player1.getY());
-		UFOLabel.setLocation(player2.getX(), player2.getY());
+		HeroLabel.setLocation(200+player1.getX(), 20+player1.getY());
+		UFOLabel.setLocation(200+player2.getX(), 20+player2.getY());
 		
 	}
 	
