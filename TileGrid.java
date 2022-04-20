@@ -2,7 +2,7 @@ import java.awt.*;
 public class TileGrid {
 
 	public Tile[][] map = new Tile[30][30];
-	int[][] binaryMap=                     {{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+	int[][] binaryMap= {{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
 						{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 						{0,0,0,0,0,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,0,0,0,0,0},
 						{0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,0,0},
@@ -35,19 +35,19 @@ public class TileGrid {
 
 	public TileGrid(){		//contructor creates always the same map
 		for(int i = 0; i<map.length; i++){
-			for(int j=0 ; j<map.length; j++){
+			for(int j=0 ; j<map[0].length; j++){
 				if (binaryMap[i][j]==0){
-					map[i][j] = new Ground(i*20, j*20, 20, 20); 
+					map[i][j] = new Ground(200+i*20, 20+j*20, 20, 20); 
 				} else if(binaryMap[i][j]==1){
-					map[i][j] = new Wall(i*20, j*20, 20, 20); 
+					map[i][j] = new Wall(200+i*20, 20+j*20, 20, 20); 
 				} else if(binaryMap[i][j]==2){
-					map[i][j] = new WinningTile(i*20, j*20, 20, 20);
+					map[i][j] = new WinningTile(200+i*20, 20+j*20, 20, 20);
 				}
 			}
 		}
 	}
 	
-		
+	
 	//displays the map
 	public void draw(Graphics g){
 		for(int i = 0; i<map.length; i++){
@@ -57,4 +57,3 @@ public class TileGrid {
 		}
 	}
 }
-	
