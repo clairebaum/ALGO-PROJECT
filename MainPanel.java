@@ -26,9 +26,12 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 	
 	//atributes relative to the GameInfo Panel
 	private JPanel GameInfo; 
-	private JLabel HeroInfo;
-	private JLabel UFOInfo;
-	private JLabel PlayerTurn; 
+	private JLabel Info;
+	private JLabel PlayerTurn;
+	private String PA;
+	private String PD;
+	public JButton startGame;
+	 
 	// atributes relative to the main Panel
 	public JButton throwDice;
 	public JButton moveWall;
@@ -52,34 +55,28 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 		//graphical component of the PlayerTurn label
 		PlayerTurn = new JLabel("Game is starting");
 		PlayerTurn.setBounds(10,10, 160, 40);
-		if (playing == 1){
-			PlayerTurn.setText("Hero's turn!");
-		} else if (playing == 2){
-			PlayerTurn.setText("UFO's turn!");
-		}
 		
-		//graphical component of the HeroInfo label
-		String HeroPA = Integer.toString(player1.availableAction);
-		String HeroPD = Integer.toString(player1.availableDisplacement);
-		HeroInfo = new JLabel("<html>HERO: <br/> Action Point : " + HeroPA + "<br/> Displacement available : " + HeroPD + "<html>");
-		HeroInfo.setBounds(40, 50, 160, 40);
-		HeroInfo.setBackground(Color.BLACK); 
 		
-		//graphical component of the UFOInfo label
-		String UFOPA = Integer.toString(player2.availableAction);
-		String UFOPD = Integer.toString(player2.availableDisplacement);
-		UFOInfo = new JLabel("<html>UFO: <br/> Action Point : " + UFOPA + "<br/> Displacement available : " + UFOPD + "<html>");
-		UFOInfo.setBounds(40, 90, 160, 40);
-		UFOInfo.setBackground(Color.BLACK); 
+		//graphical component of the Info label
+		PA = Integer.toString(players[playing].availableAction);
+		PD = Integer.toString(players[playing].availableDisplacement);
+		Info = new JLabel(" ");
+		Info.setBounds(40, 50, 160, 40);
+		Info.setBackground(Color.BLACK); 
+		
+		// button to start game
+		startGame = new JButton("START");
+		startGame.setBounds(10, 200, 150, 40);
+		startGame.setBackground(Color.blue);
+		startGame.addActionListener(this);
 		
 		//graphical component of the GameInfo Panel
 		GameInfo = new JPanel();
-		GameInfo.setBounds(10,200, 180, 160);
+		GameInfo.setBounds(10,200, 180, 80);
 		GameInfo.setBackground(Color.blue);
 		GameInfo.add(PlayerTurn);
-		GameInfo.add(HeroInfo);
-		GameInfo.add(UFOInfo);
-		
+		GameInfo.add(Info);
+		GameInfo.setVisible(false);
 		
 		// button to throw the dice
 		throwDice = new JButton("Throw Dice");
@@ -95,18 +92,21 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 		HeroIcon = new ImageIcon("C:/Users/gadis/Desktop/INSA Lyon/FIMI 2A/ALGO/projet v2/ALGO-PROJECT-April_version/Icon/Hero.png");
 		HeroLabel = new JLabel(HeroIcon);
 		HeroLabel.setSize(30, 30);
-
+		HeroLabel.setVisible(false);
+		
 		// JLabel with the Image Icon of the UFO
 		UFOIcon = new ImageIcon("C:/Users/gadis/Desktop/INSA Lyon/FIMI 2A/ALGO/projet v2/ALGO-PROJECT-April_version/Icon/UFO.png");
 		UFOLabel = new JLabel(UFOIcon);
 		UFOLabel.setSize(45, 45);
-
+		UFOLabel.setVisible(false);
+		
 		// add
 		this.add(throwDice);
 		this.add(moveWall);
 		this.add(HeroLabel);
 		this.add(UFOLabel);
 		this.add(GameInfo);
+		this.add(startGame);
 		
 		// thread creation
 		gameThread = new Thread(this); //I don't remember if it was already there
@@ -209,14 +209,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 		if(!player1.hasWinned && !player2.hasWinned) {
 			if(state == WAITING_FOR_DICE) {
 				if(throwDiceClicked) {
-					players[playing].availableDisplacement = (int)(Math.random()*6)+1; //before it always gave 0 because without parenthesis it only casts Math.random, giving always 0
+					players[playing].availableDisplacement = (int)(Math.random()*6)+1; System.out.println(players[playing].availableDisplacement + " " + players[playing].availableAction);//before it always gave 0 because without parenthesis it only casts Math.random, giving always 0
 																					//we add 1 to get something between 1 and 6 instead of between 0 and 5
 					throwDiceClicked = false; //we need to put it back to false, we didn't before
 					state = WAITING_FOR_ACTION; // goes next
 				}
 			}else if(state == WAITING_FOR_ACTION) {
 				if(players[playing].availableDisplacement > 0) {
-					if(players[playing].updatePosition())players[playing].availableDisplacement-=1; // shorter way to write an if-loop
+					if(players[playing].updatePosition())players[playing].availableDisplacement-=1;System.out.println(players[playing].availableDisplacement + " " + players[playing].availableAction); // shorter way to write an if-loop
 																			// we changed updatePosition so that it returns a boolean (equivalent to the previous 'pressed' we could maybe change it back to pressed idk)
 					
 				}else {
@@ -236,7 +236,17 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 		// graphical component of the grid
 		super.paintComponent(g);
 		theTileGrid.draw(g);
-
+		
+		//variable for the game Info Label
+		PA = Integer.toString(players[playing].availableAction);
+		PD = Integer.toString(players[playing].availableDisplacement);
+		Info.setText("<html> Action Point : " + PA + "<br/> Displacement available : " + PD + "<html>");
+		if (playing == 0){
+			PlayerTurn.setText("Hero's turn!");
+		} else if (playing == 1){
+			PlayerTurn.setText("UFO's turn!");
+		}
+		
 		// graphical component of the characters
 		HeroLabel.setLocation(200 + player1.getX()*20, 10 + player1.getY()*20);
 		UFOLabel.setLocation(190 + player2.getX()*20, player2.getY()*20);
@@ -249,8 +259,12 @@ public class MainPanel extends JPanel implements Runnable, ActionListener {
 			throwDiceClicked = true;
 		} else if (e.getSource() == moveWall) {
 			moveWallClicked = true;
+		} else if (e.getSource() ==startGame) {
+			HeroLabel.setVisible(true);
+			UFOLabel.setVisible(true);
+			GameInfo.setVisible(true);
+			startGame.setVisible(false);
 		}
-
 		MainClass.mainFrame.requestFocusInWindow(); //the java KeyListener only works when the window is focused  
 	}
 }
