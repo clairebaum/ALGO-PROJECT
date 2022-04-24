@@ -7,9 +7,9 @@ public class Wall extends Tile{
 	}
 	
 	public void paint(Graphics g){
-		g.setColor(new Color(46,46,31));
+		g.setColor(new Color(128,0,0));
 		g.fillRect(this.posX, this.posY, this.height, this.width);
-		g.setColor(new Color(0,0,0));
+		g.setColor(new Color(51, 0, 0));
 		g.drawRect(this.posX, this.posY, this.height, this.width);
 		
 	}
