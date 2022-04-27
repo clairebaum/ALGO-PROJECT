@@ -42,7 +42,7 @@ public class FrameMenu extends JFrame implements ActionListener {
 		
 		//control JLabel
 		controls = new JLabel ("<html> CONTROLS <br/> <br/> HERO : arrows <br/> <br/> UFO : Z Q S D ",SwingConstants.CENTER);
-		controls.setBounds(250,500,500,160);
+		controls.setBounds(250,500,500,260);
 		controls.setForeground(Color.WHITE);
 		this.add(controls);
 		controls.setVisible(false);
