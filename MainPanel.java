@@ -5,8 +5,8 @@ import java.awt.event.*;
 public class MainPanel extends JPanel implements Runnable, ActionListener, MouseListener {
 
 	// attributes relative to the game update
-	public Hero player1 = new Hero(1, 1); //so that they don't spawn on a wall
-	public UFO player2 = new UFO(15, 15); 
+	public static Hero player1 = new Hero(1, 1); //so that they don't spawn on a wall
+	public static UFO player2 = new UFO(15, 15); 
 
 	public Character[] players = new Character[]{player1, player2}; //easier to create an array to manipulate the players
 	public int playing = 0; // which player has to play
