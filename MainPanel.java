@@ -29,6 +29,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	private String PA;
 	private String PD;
 	public JButton startGame;
+	public JLabel Warning ;
 
 	// attributes relative to the main Panel
 	public JButton throwDice;
@@ -74,12 +75,20 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		
 		//graphical component of the GameInfo Panel
 		GameInfo = new JPanel();
-		GameInfo.setBounds(10,200, 180, 80);
+		GameInfo.setBounds(10, 200, 180, 80);
 		GameInfo.setBackground(new Color(123, 165, 248));
 		GameInfo.add(PlayerTurn);
 		GameInfo.add(Info);
 		GameInfo.setVisible(false);
-
+		
+		//graphical component of the Warning Label
+		Warning = new JLabel("You 're stuck! Get out by moving the wall around you", SwingConstants.CENTER);
+		Warning.setBounds(300, 660, 400, 40);
+		Warning.setOpaque(true);
+		Warning.setBackground(Color.RED);
+		Warning.setForeground(Color.WHITE);
+		Warning.setVisible(false);
+		
 		// button to throw the dice
 		throwDice = new JButton("Throw Dice");
 		throwDice.setBounds(10, 400, 150, 40);
@@ -91,13 +100,13 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		moveWall.addActionListener(this);
 
 		// JLabel with the Image Icon of the hero
-		HeroIcon = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/Icon/avatar.png");
+		HeroIcon = new ImageIcon("C:/Users/gadis/Desktop/algo final/ALGO-PROJECT-FINAL/Icon/Hero.png");
 		HeroLabel = new JLabel(HeroIcon);
 		HeroLabel.setSize(30, 30);
 		HeroLabel.setVisible(false);
 
 		// JLabel with the Image Icon of the UFO
-		UFOIcon = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/Icon/UFO.png");
+		UFOIcon = new ImageIcon("C:/Users/gadis/Desktop/algo final/ALGO-PROJECT-FINAL/Icon/UFO.png");
 		UFOLabel = new JLabel(UFOIcon);
 		UFOLabel.setSize(45, 45);
 		UFOLabel.setVisible(false);
@@ -109,6 +118,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		this.add(UFOLabel);
 		this.add(GameInfo);
 		this.add(startGame);
+		this.add(Warning);
 		addMouseListener(this);
 
 		// thread creation
@@ -200,9 +210,16 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	// action listener for the buttons
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == throwDice) {
-			throwDiceClicked = true;
+			boolean stuckTop = (theTileGrid.binaryMap[players[playing].x][players[playing].y -1]==1);
+			boolean stuckBot = (theTileGrid.binaryMap[players[playing].x][players[playing].y +1]==1);
+			boolean stuckLeft = (theTileGrid.binaryMap[players[playing].x-1][players[playing].y]==1);
+			boolean stuckRight = (theTileGrid.binaryMap[players[playing].x+1][players[playing].y]==1);
+			if (!(stuckTop && stuckBot && stuckLeft && stuckRight)){
+				throwDiceClicked = true;
+			} else { Warning.setVisible(true);}
 		} else if (e.getSource() == moveWall) {
 			moveWallClicked = true;
+			Warning.setVisible(false);
 		} else if (e.getSource() ==startGame) {
 				HeroLabel.setVisible(true);
 				UFOLabel.setVisible(true);
@@ -227,5 +244,8 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	public void mouseEntered(java.awt.event.MouseEvent e) {}
  	public void mouseExited(java.awt.event.MouseEvent e) {}
 }
+
+
+
 
 
