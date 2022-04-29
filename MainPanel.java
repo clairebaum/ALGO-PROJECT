@@ -210,10 +210,15 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	// action listener for the buttons
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == throwDice) {
-			boolean stuckTop = (theTileGrid.binaryMap[players[playing].x][players[playing].y -1]==1);
-			boolean stuckBot = (theTileGrid.binaryMap[players[playing].x][players[playing].y +1]==1);
-			boolean stuckLeft = (theTileGrid.binaryMap[players[playing].x-1][players[playing].y]==1);
-			boolean stuckRight = (theTileGrid.binaryMap[players[playing].x+1][players[playing].y]==1);
+			boolean stuckTop = true;
+			boolean stuckBot = true;
+			boolean stuckLeft = true;
+			boolean stuckRight = true;
+			
+			if (players[playing].x != 0) { stuckLeft = (theTileGrid.binaryMap[players[playing].x-1][players[playing].y]==1);}
+			if (players[playing].x != 29) { stuckRight = (theTileGrid.binaryMap[players[playing].x+1][players[playing].y]==1);}
+			if(players[playing].y != 0) { stuckTop = (theTileGrid.binaryMap[players[playing].x][players[playing].y -1]==1);}
+			if (players[playing].y != 29) {stuckBot = (theTileGrid.binaryMap[players[playing].x][players[playing].y +1]==1);}
 			if (!(stuckTop && stuckBot && stuckLeft && stuckRight) && state == WAITING_FOR_DICE){
 				throwDiceClicked = true;
 			} else { Warning.setVisible(true);}
