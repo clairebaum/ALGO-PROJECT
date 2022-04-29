@@ -45,7 +45,7 @@ public class Character {
 		} else if (leftPressed) {
 			if (getX() > 0 && MainPanel.theTileGrid.binaryMap[getX() - 1 ][getY()] != 1){
 				this.x -= 1;
-				somethingChanged = false;
+				somethingChanged = true;
 			}
 		}	
 		return somethingChanged;	
