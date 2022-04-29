@@ -71,7 +71,7 @@ public class Character {
 				}
 			} else if(0<=x && x<=30 && y>=0 && y<=30 && MainPanel.firstSelected){
 				System.out.println("entrée dans la boucle de conditions de coordonnées second"); 
-				if(MainPanel.theTileGrid.binaryMap[x][y] ==0){
+				if(MainPanel.theTileGrid.binaryMap[x][y] ==0 && x!=MainPanel.player1.getX() && y!=MainPanel.player1.getY() && x!=MainPanel.player2.getX() && y!=MainPanel.player2.getY()){
 					System.out.println("entrée dans la boucle de condition binaryMap second");
 					MainPanel.theTileGrid.binaryMap[x][y]=1;
 					MainPanel.theTileGrid.map[x][y]=new Wall(20*x+200,20*y+20,20,20);
