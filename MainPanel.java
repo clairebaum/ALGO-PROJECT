@@ -214,12 +214,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 			boolean stuckBot = (theTileGrid.binaryMap[players[playing].x][players[playing].y +1]==1);
 			boolean stuckLeft = (theTileGrid.binaryMap[players[playing].x-1][players[playing].y]==1);
 			boolean stuckRight = (theTileGrid.binaryMap[players[playing].x+1][players[playing].y]==1);
-			if (!(stuckTop && stuckBot && stuckLeft && stuckRight)){
+			if (!(stuckTop && stuckBot && stuckLeft && stuckRight) && state == WAITING_FOR_DICE){
 				throwDiceClicked = true;
 			} else { Warning.setVisible(true);}
 		} else if (e.getSource() == moveWall) {
-			moveWallClicked = true;
-			Warning.setVisible(false);
+			if(sate==WAITING_FOR_DICE){
+				moveWallClicked = true;
+				Warning.setVisible(false);
+			}
 		} else if (e.getSource() ==startGame) {
 				HeroLabel.setVisible(true);
 				UFOLabel.setVisible(true);
