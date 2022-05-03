@@ -153,7 +153,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 
 	public void update() {
 		for(Character c : players)c.KeyPressed(); //calls the method KeyPressed for both players, it couldn't work before because it was never called
-		if(!player1.hasWinned && !player2.hasWinned) {
+		if(!player1.hasWon && !player2.hasWon) {
 			if(state == WAITING_FOR_DICE) {
 				if(throwDiceClicked) {
 					players[playing].availableDisplacement = (int)(Math.random()*6)+1; //before it always gave 0 because without parenthesis it only casts Math.random, giving always 0
