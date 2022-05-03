@@ -30,6 +30,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	private String PD;
 	public JButton startGame;
 	public JLabel Warning ;
+	public JLabel EndGame;
 
 	// attributes relative to the main Panel
 	public JButton throwDice;
@@ -89,6 +90,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		Warning.setForeground(Color.WHITE);
 		Warning.setVisible(false);
 		
+		//graphical component of the EndGame Label
+		EndGame = new JLabel("", SwingConstants.CENTER);
+		EndGame.setBounds(300, 230, 400, 180);
+		EndGame.setOpaque(true);
+		EndGame.setBackground(Color.BLACK);
+		EndGame.setForeground(Color.WHITE);
+		EndGame.setVisible(false);
+		
 		// button to throw the dice
 		throwDice = new JButton("Throw Dice");
 		throwDice.setBounds(10, 400, 150, 40);
@@ -140,6 +149,8 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		while (gameThread != null) {
 
 			this.update();
+			player1.winOrLose();
+			player2.winOrLose(player1.getX(), player1.getY());
 			this.repaint();
 
 			try {
@@ -181,6 +192,19 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 				}
 			}
 
+		}
+		
+		//graphical component at the end of the game
+		if (player1.hasWinned){
+			EndGame.setText("<html> The Hero made it home! <br/><br/> Congratulations!");
+			EndGame.setVisible(true);
+			HeroLabel.setVisible(false);
+			UFOLabel.setVisible(false);
+		} else if (player2.hasWinned){
+			EndGame.setText("<html> The Hero has been caught! <br/><br/> The UFO wins!");
+			EndGame.setVisible(true);
+			HeroLabel.setVisible(false);
+			UFOLabel.setVisible(false);
 		}
 	}
 
