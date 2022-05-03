@@ -223,7 +223,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 				throwDiceClicked = true;
 			} else { Warning.setVisible(true);}
 		} else if (e.getSource() == moveWall) {
-			if(sate==WAITING_FOR_DICE){
+			if(state==WAITING_FOR_DICE){
 				moveWallClicked = true;
 				Warning.setVisible(false);
 			}
