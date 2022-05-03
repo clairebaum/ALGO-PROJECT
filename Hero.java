@@ -6,9 +6,9 @@ public class Hero extends Character {
     }
 
     public void winOrLose (){
-        if (this.x>12 && this.x<17 && this.y>12 && this.y<17){ //change 3 to the centre coordinates!!!
-            this.hasWinned = true;
-            System.out.println("The hero has winned!");
+        if (this.x>12 && this.x<17 && this.y>12 && this.y<17){ //center coordinates
+            this.hasWon = true;
+            System.out.println("The hero has won!");
         }
     }
 
