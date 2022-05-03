@@ -3,7 +3,7 @@ public class Character {
 	int y;
 	int availableDisplacement;
 	int availableWallMoving;
-	boolean hasWinned;
+	boolean hasWon;
 	int player;
 	boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -11,7 +11,7 @@ public class Character {
 		this.x = xini;
 		this.y = yini;
 		this.availableDisplacement = 0;
-		this.hasWinned = false;
+		this.hasWon = false;
 		this.availableWallMoving = 0;
 
 	}
