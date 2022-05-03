@@ -8,7 +8,8 @@ public class UFO extends Character {
 
     public void winOrLose (int xHero, int yHero){
         if(this.x==xHero && this.y==yHero){
-            this.hasWinned=true;
+            this.hasWon=true;
+            System.out.println("The UFO has won!");
         }
     }
 
