@@ -4,9 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.Font;
 
-public class FrameMenu extends JFrame implements ActionListener {
+public class FrameMenu extends JFrame implements ActionListener { //Frame handling the introduction then redirecting to FrameGame
 
-	// attributes of class frameGame
 	public JPanel animPanel;
 	public JButton next;
 	public int clicked;
@@ -16,8 +15,10 @@ public class FrameMenu extends JFrame implements ActionListener {
 	public JLabel animl0, animl1, animl2, animl3, animl4, animl5, animl6 ;
 	public ImageIcon anim0, anim1, anim2, anim3, anim4, anim5, anim6 ;
 	
+	/** Constructor
+	  */
 	public FrameMenu(String name, int width, int height) {
-		super(name);
+		super(name); 
 		this.setSize(width, height);
 		this.setLocation(200, 5);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +41,7 @@ public class FrameMenu extends JFrame implements ActionListener {
 		text.setFont(new Font("Monospaced", Font.ITALIC, 14));
 		text.setVisible(false);
 		
-		//control JLabel
+		//JLabel to display the controls 
 		controls = new JLabel ("<html> CONTROLS <br/> <br/> HERO : arrows <br/> <br/> UFO : Z Q S D ",SwingConstants.CENTER);
 		controls.setBounds(250,500,500,260);
 		controls.setForeground(Color.WHITE);
@@ -61,15 +62,16 @@ public class FrameMenu extends JFrame implements ActionListener {
 		//variable to change animation frame
 		clicked = 0; 
 		
-		
 		//animation Panel
-		anim0 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/0.jpg");
-		anim1 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/1.jpg");
-		anim2 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/2.jpg");
-		anim3 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/3.jpg");
-		anim4 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/4.jpg");
-		anim5 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/5.jpg");
-		anim6 = new ImageIcon("C:/Users/Eléonore/Desktop/2A/algo/Projet final/animation/6.jpg");
+		//loading of the images
+		anim0 = new ImageIcon("animation/0.jpg");
+		anim1 = new ImageIcon("animation/1.jpg");
+		anim2 = new ImageIcon("animation/2.jpg");
+		anim3 = new ImageIcon("animation/3.jpg");
+		anim4 = new ImageIcon("animation/4.jpg");
+		anim5 = new ImageIcon("animation/5.jpg");
+		anim6 = new ImageIcon("animation/6.jpg");
+		//creation of the corresponding JPanels
 		animl0 = new JLabel(anim0);
 		animl0.setBounds(0, 0, 500, 375);
 		animPanel.add(animl0);
@@ -100,17 +102,18 @@ public class FrameMenu extends JFrame implements ActionListener {
 		
 		//main frame
 		mainFrame = new FrameGame("UFO ATTACK", 1000, 800); //creates the game window
-		mainFrame.mainPanel.gameThread.start(); //launches the game
+		mainFrame.mainPanel.gameThread.start(); //launches the game through MainPanel
 		mainFrame.setVisible(false);
 		mainFrame.requestFocusInWindow(); //the java KeyListener only works when the window is focused   
-		this.addKeyListener(new KeyHandler());
+		this.addKeyListener(new KeyHandler()); //see KeyHandler, the class dealing with all the key-actions
 		this.setVisible(true);
 		this.setFocusable(true);
 	}
 	
+	/** actionPerformed override, transitions from one introduction slide to the next one when the player clicks
+	  */
 	public void actionPerformed(ActionEvent e){
 		clicked ++; 
-		System.out.println(clicked);
 		
 		switch (clicked){
 			default :
@@ -154,7 +157,7 @@ public class FrameMenu extends JFrame implements ActionListener {
 			break ;
 			case 8:
 				this.setVisible(false);
-				mainFrame.setVisible(true);
+				mainFrame.setVisible(true); //redirects to FrameGame through the instance mainFrame
 			break;
 		}
 	}
