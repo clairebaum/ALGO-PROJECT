@@ -2,27 +2,27 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 
-// implementation of the links between the keyboard and the action
+// Implements the links between the keyboard and the action
 public class KeyHandler implements KeyListener {
 
   public static long lastUpTime, lastDownTime, lastLeftTime, lastRightTime,
                       lastZTime, lastDTime, lastSTime, lastQTime;
-
   public static long[] keyTimes = new long[256]; //array storing the last time the key was pressed at the position corresponding to its ascii code
+  private static final int LOOP_DELAY = 200; //corresponds to the actualising rate of the thread
 
-  public void keyTyped(KeyEvent e) {}
-
+	/** updates the value of the time at the position of the pressed key 
+	  */
   public void keyPressed(KeyEvent e) {
-    keyTimes[e.getKeyCode()] = System.currentTimeMillis(); //updates the value of the time at the position of the pressed key 
+    keyTimes[e.getKeyCode()] = System.currentTimeMillis(); 
   }
 
   @Override
-
+  public void keyTyped(KeyEvent e) {}
   public void keyReleased(KeyEvent e) {}
 
-  private static final int LOOP_DELAY = 200; //corresponds to the actualising rate of the thread
-
-  public static boolean isKeyPressed(int key) { //tests if the given key has just been pressed and put its time to zero
+	/** tests if the given key has been pressed after the last update and put its time to zero
+	  */
+  public static boolean isKeyPressed(int key) { 
     if(System.currentTimeMillis() - keyTimes[key] <= LOOP_DELAY) {
       keyTimes[key] = 0;
       return true;
@@ -30,7 +30,9 @@ public class KeyHandler implements KeyListener {
     return false;
   }
 
-  public static boolean isUpPressed() { //keyPressed is used for each key 
+	/** keyPressed is used for each key 
+	  */
+  public static boolean isUpPressed() { 
     return isKeyPressed(KeyEvent.VK_UP);
   }
 
