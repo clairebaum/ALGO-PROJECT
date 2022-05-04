@@ -53,21 +53,16 @@ public class Character { //mother class of Hero and UFO
 
 
 	public boolean updateWalls (){
-		boolean somethingChanged = false;
+		boolean somethingChanged = false; 
 		if(MainPanel.recentlyClicked){
-			int x = (int)((MainPanel.mouseX-200)/20);
+			int x = (int)((MainPanel.mouseX-200)/20); //gets the coordinates of the mouse (stored in MainPanel) and converts them into the index of the tile
 			int y = (int)((MainPanel.mouseY-20)/20);
-			System.out.println(x+" "+y);
-			System.out.println("firstSelected: " + MainPanel.firstSelected);
 
-			if(0<=x && x<=30 && y>=0 && y<=30 && !MainPanel.firstSelected){
-				System.out.println("entrée dans la boucle de conditions de coordonnées first");
+			if(0<=x && x<=30 && y>=0 && y<=30 && !MainPanel.firstSelected){ //the boolean firstSelected is true when the wall to move has been selected
 				if(MainPanel.theTileGrid.binaryMap[x][y] ==1){
-					System.out.println("entrée dans la boucle de condition binaryMap first");
 					MainPanel.theTileGrid.binaryMap[x][y]=0;
 					MainPanel.theTileGrid.map[x][y]=new Ground(20*x+200,20*y+20,20,20);
 					MainPanel.firstSelected=true;
-					System.out.println("recentlyClicked: " + MainPanel.recentlyClicked);
 				}
 			} else if(0<=x && x<=30 && y>=0 && y<=30 && MainPanel.firstSelected){
 				System.out.println("entrée dans la boucle de conditions de coordonnées second"); 
