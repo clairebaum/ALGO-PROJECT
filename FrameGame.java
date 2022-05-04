@@ -1,11 +1,11 @@
 import javax.swing.*;
 
-public class FrameGame extends JFrame {
+public class FrameGame extends JFrame { //redirects to MainPanel
 
-	// attributes of class frameGame
 	public MainPanel mainPanel;
 
-
+	/** Constructor
+	  */
 	public FrameGame(String name, int width, int height) {
 		super(name);
 		this.setSize(width, height);
@@ -13,13 +13,10 @@ public class FrameGame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// JPanel that will contain everything (grid, buttons...)
-		mainPanel = new MainPanel();
+		mainPanel = new MainPanel(); 
 
-		this.addKeyListener(new KeyHandler()); //we never added the KeyListener before so it couldn't work
-											   //must be added to the frame because this is where the focus is	
-
+		this.addKeyListener(new KeyHandler()); //see KeyHandler, the class dealing with all the key-actions						   
 		this.add(mainPanel);
-
 		this.setVisible(true);
 		this.setFocusable(true);
 
