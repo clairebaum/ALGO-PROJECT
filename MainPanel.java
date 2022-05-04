@@ -7,16 +7,15 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	// attributes relative to the game update
 	public static Hero player1 = new Hero(1, 1); //so that they don't spawn on a wall
 	public static UFO player2 = new UFO(15, 15); 
-
 	public Character[] players = new Character[]{player1, player2}; //easier to create an array to manipulate the players
 	public int playing = 0; // which player has to play
-	public static final int WAITING_FOR_DICE = 0, WAITING_FOR_ACTION = 1; //useful later on to determine the state of the game (action=choosing a direction or a wall to move)
-	public int state = 0; //at the beginning no one has clicked on ThrowDice
+	public static final int WAITING_FOR_CHOICE = 0, WAITING_FOR_ACTION = 1; 
+	public int state = 0; //at the beginning no one has chosen an action yet
 
 	public Thread gameThread;
 
-	//attributes relative to the TileGrid 
-	public static TileGrid theTileGrid; //static because we access it from other classes and there is only one TileGrid
+	//attributes relative to the maze
+	public static TileGrid theTileGrid; 
 	private ImageIcon HeroIcon;
 	private ImageIcon UFOIcon;
 	private JLabel HeroLabel;
@@ -37,18 +36,18 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	public JButton moveWall;
 	public boolean moveWallClicked;
 	public boolean throwDiceClicked;
-	public boolean waitingForDirection = false;
 
 	//attributes relative to the MouseListener
 	public static boolean recentlyClicked = false; 
-	public static boolean firstSelected = false;
+	public static boolean firstSelected = false; //true if the wall to move has been selected already
 	public static double mouseX = 0.0;
 	public static double mouseY = 0.0;
 
-	// constructor
+	/** Constructor
+	  */
 	public MainPanel() {
 		super();
-		theTileGrid = new TileGrid();
+		theTileGrid = new TileGrid(); //creates the maze
 
 		// graphical component of the main Panel
 		this.setLayout(null);
@@ -58,7 +57,6 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		//graphical component of the PlayerTurn label
 		PlayerTurn = new JLabel("Game is starting");
 		PlayerTurn.setBounds(10,10, 160, 40);
-	
 		
 		//graphical component of the Info label
 		PA = Integer.toString(players[playing].availableWallMoving);
@@ -109,13 +107,13 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		moveWall.addActionListener(this);
 
 		// JLabel with the Image Icon of the hero
-		HeroIcon = new ImageIcon("C:/Users/gadis/Desktop/algo final/ALGO-PROJECT-FINAL/Icon/Hero.png");
+		HeroIcon = new ImageIcon("Icon/avatar.png");
 		HeroLabel = new JLabel(HeroIcon);
 		HeroLabel.setSize(30, 30);
 		HeroLabel.setVisible(false);
 
 		// JLabel with the Image Icon of the UFO
-		UFOIcon = new ImageIcon("C:/Users/gadis/Desktop/algo final/ALGO-PROJECT-FINAL/Icon/UFO.png");
+		UFOIcon = new ImageIcon("Icon/UFO.png");
 		UFOLabel = new JLabel(UFOIcon);
 		UFOLabel.setSize(45, 45);
 		UFOLabel.setVisible(false);
@@ -134,25 +132,28 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		gameThread = new Thread(this); 
 	}
 
-	// starts the thread to launch the game update
+
+	/** starts the thread to launch the game update
+	  */
 	public void start() {
 		gameThread.start();
 	}
 
-	// closes the thread
+
+	/** closes the thread
+	  */
 	public void stop() {
 	}
 
-	// runs the thread <=> execution of the game
+
+	/** runs the thread => execution of the game
+	  */
 	public void run() {
-
 		while (gameThread != null) {
-
 			this.update();
 			player1.winOrLose();
-			player2.winOrLose(player1.getX(), player1.getY());
+			player2.winOrLose(player1.x, player1.y);
 			this.repaint();
-
 			try {
 				Thread.sleep(200);  
 			} catch (InterruptedException e) {
@@ -162,14 +163,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	}
 
 
+	/** Method that handles the execution of the turn-by-turn mechanism
+	  */
 	public void update() {
-		for(Character c : players)c.KeyPressed(); //calls the method KeyPressed for both players, it couldn't work before because it was never called
 		if(!player1.hasWon && !player2.hasWon) {
-			if(state == WAITING_FOR_DICE) {
+			if(state == WAITING_FOR_CHOICE) {
 				if(throwDiceClicked) {
-					players[playing].availableDisplacement = (int)(Math.random()*6)+1; //before it always gave 0 because without parenthesis it only casts Math.random, giving always 0
-																					//we add 1 to get something between 1 and 6 instead of between 0 and 5
-					throwDiceClicked = false; //we need to put it back to false, we didn't before
+					players[playing].availableDisplacement = (int)(Math.random()*6)+1; //acts like a roll of dice												
+					throwDiceClicked = false; 
 					state = WAITING_FOR_ACTION; // goes next
 				} else if (moveWallClicked) {
 					players[playing].availableWallMoving = 3;
@@ -178,14 +179,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 				}
 			
 			}else if(state == WAITING_FOR_ACTION) {
+				for(Character c : players)c.KeyPressed(); //calls the method KeyPressed for both players
 				if(players[playing].availableDisplacement > 0) {
-					if(players[playing].updatePosition())players[playing].availableDisplacement-=1; // shorter way to write an if-loop
-																			// we changed updatePosition so that it returns a boolean (equivalent to the previous 'pressed' we could maybe change it back to pressed idk)
+					if(players[playing].updatePosition())players[playing].availableDisplacement-=1; //updatePosition() returns if something changed, i.e. if the character moved														
 				}else if(players[playing].availableWallMoving > 0) {
-					if(players[playing].updateWalls())players[playing].availableWallMoving-=1;
+					if(players[playing].updateWalls())players[playing].availableWallMoving-=1; //updateWalls() returns if something changed, i.e. if a wall has been moved	
 
 				}else{
-					state = 0; // waiting again for a dice roll
+					state = 0; // waiting again for a choice of action
 					if(playing == 0)playing = 1; //changes turn
 					else playing = 0;
 
@@ -193,7 +194,7 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 			}
 
 		}
-		
+
 		//graphical component at the end of the game
 		if (player1.hasWon){
 			EndGame.setText("<html> The Hero made it home! <br/><br/> Congratulations!");
@@ -208,14 +209,15 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		}
 	}
 
-	// repaint function, has not changed
+	/** paint method
+	  */
 	public void paintComponent(Graphics g) {
 
-		// graphical component of the grid
+		// display of the grid
 		super.paintComponent(g);
 		theTileGrid.draw(g);
 
-		//variable for the game Info Label
+		//display of the game Info Label
 		PA = Integer.toString(players[playing].availableWallMoving);
 		PD = Integer.toString(players[playing].availableDisplacement);
 		Info.setText("<html> Wall movements available : " + PA + "<br/> Displacement available : " + PD + "<html>");
@@ -225,13 +227,14 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		PlayerTurn.setText("UFO's turn!");
 		}
 
-		// graphical component of the characters
-		HeroLabel.setLocation(200 + player1.getX()*20, 10 + player1.getY()*20);
-		UFOLabel.setLocation(190 + player2.getX()*20, player2.getY()*20);
+		//display of the characters
+		HeroLabel.setLocation(200 + player1.x*20, 10 + player1.y*20);
+		UFOLabel.setLocation(190 + player2.x*20, player2.y*20);
 
 	}
 
-	// action listener for the buttons
+	/** override of the actionPerformed for the buttons
+	  */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == throwDice) {
 			boolean stuckTop = true;
@@ -243,29 +246,33 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 			if (players[playing].x != 29) { stuckRight = (theTileGrid.binaryMap[players[playing].x+1][players[playing].y]==1);}
 			if(players[playing].y != 0) { stuckTop = (theTileGrid.binaryMap[players[playing].x][players[playing].y -1]==1);}
 			if (players[playing].y != 29) {stuckBot = (theTileGrid.binaryMap[players[playing].x][players[playing].y +1]==1);}
-			if (!(stuckTop && stuckBot && stuckLeft && stuckRight) && state == WAITING_FOR_DICE){
+			if (!(stuckTop && stuckBot && stuckLeft && stuckRight) && state == WAITING_FOR_CHOICE){
 				throwDiceClicked = true;
 			} else { Warning.setVisible(true);}
 		} else if (e.getSource() == moveWall) {
-			if(state==WAITING_FOR_DICE){
+			if(state==WAITING_FOR_CHOICE){
 				moveWallClicked = true;
 				Warning.setVisible(false);
 			}
-		} else if (e.getSource() ==startGame) {
+		} else if (e.getSource() == startGame) {
 				HeroLabel.setVisible(true);
 				UFOLabel.setVisible(true);
 				GameInfo.setVisible(true);
 				startGame.setVisible(false);
 		}
-		FrameMenu.mainFrame.requestFocusInWindow(); //the java KeyListener only works when the window is focused  
+		FrameMenu.mainFrame.requestFocusInWindow(); 
 	}
 
-
+	/** override of the mousePressed that updates the attributes for the mouse position
+	  */
 	public void mousePressed (java.awt.event.MouseEvent e){
 		mouseX=e.getX();
         mouseY=e.getY();
 		recentlyClicked = true;
 	}
+
+	/** override of the mouseReleased
+	  */
 	public void mouseReleased (java.awt.event.MouseEvent e){
 		recentlyClicked = false;
 	}
@@ -275,8 +282,4 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 	public void mouseEntered(java.awt.event.MouseEvent e) {}
  	public void mouseExited(java.awt.event.MouseEvent e) {}
 }
-
-
-
-
 
