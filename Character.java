@@ -1,11 +1,11 @@
-public class Character {
+public class Character { //mother class of Hero and UFO
 	int x;
 	int y;
 	int availableDisplacement;
 	int availableWallMoving;
 	boolean hasWon;
 	int player;
-	boolean upPressed, downPressed, leftPressed, rightPressed;
+	boolean upPressed, downPressed, leftPressed, rightPressed; //correspond to the keys pressed by the player indicating where he wants to move
 
 	public Character(int xini, int yini) { // constructor setting the initial position
 		this.x = xini;
