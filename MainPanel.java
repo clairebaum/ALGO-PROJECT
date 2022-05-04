@@ -195,12 +195,12 @@ public class MainPanel extends JPanel implements Runnable, ActionListener, Mouse
 		}
 		
 		//graphical component at the end of the game
-		if (player1.hasWinned){
+		if (player1.hasWon){
 			EndGame.setText("<html> The Hero made it home! <br/><br/> Congratulations!");
 			EndGame.setVisible(true);
 			HeroLabel.setVisible(false);
 			UFOLabel.setVisible(false);
-		} else if (player2.hasWinned){
+		} else if (player2.hasWon){
 			EndGame.setText("<html> The Hero has been caught! <br/><br/> The UFO wins!");
 			EndGame.setVisible(true);
 			HeroLabel.setVisible(false);
