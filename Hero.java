@@ -16,4 +16,13 @@ public class Hero extends Character {
         }
     }
 
+	/** Override of KeyPressed from Character, checks if a key has been pressed and stores the information in the attributes
+	  */
+    public void KeyPressed(){
+        upPressed = KeyHandler.isUpPressed(); //since these are static attributes we can access them here
+        downPressed = KeyHandler.isDownPressed(); 
+        leftPressed = KeyHandler.isLeftPressed();
+        rightPressed = KeyHandler.isRightPressed();
+    }
+
 }
