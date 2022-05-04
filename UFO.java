@@ -16,4 +16,13 @@ public class UFO extends Character {
         }
     }
 
+    /** Override of KeyPressed from Character, checks if a key has been pressed and stores the information in the attributes
+	  */
+    public void KeyPressed(){
+        upPressed = KeyHandler.isZPressed();
+        downPressed = KeyHandler.isSPressed();
+        leftPressed = KeyHandler.isQPressed();
+        rightPressed = KeyHandler.isDPressed();
+    }
+
 }
