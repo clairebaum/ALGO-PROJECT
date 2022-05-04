@@ -1,49 +1,43 @@
-public class Character { //mother class of Hero and UFO
+public abstract class Character { //mother class of Hero and UFO
 	int x;
 	int y;
 	int availableDisplacement;
 	int availableWallMoving;
 	boolean hasWon;
 	int player;
-	boolean upPressed, downPressed, leftPressed, rightPressed; //correspond to the keys pressed by the player indicating where he wants to move
+	boolean upPressed, downPressed, leftPressed, rightPressed; //link the displacement and the keys pressed by the player, see methods KeyPressed() and updatePosition()
 
+	/** Constructor
+	  */
 	public Character(int xini, int yini) { // constructor setting the initial position
 		this.x = xini;
 		this.y = yini;
 		this.availableDisplacement = 0;
 		this.hasWon = false;
 		this.availableWallMoving = 0;
-
 	}
-
-	public int getX() {
-		return this.x;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-
 	
+	/** Changes the position of the avatars, according to the keys pressed
+	  */
 	public boolean updatePosition() {
 		boolean somethingChanged = false; //the boolean that will be returned
 		if (upPressed) {
-			if (getY() > 0 && MainPanel.theTileGrid.binaryMap[getX()][getY() - 1] != 1) { //tests if it's a wall 
+			if (this.y > 0 && MainPanel.theTileGrid.binaryMap[this.x][this.y - 1] != 1) { //tests if it's a wall 
 				this.y += -1; //upPressed corresponds to minus 1 because the scale is downwards
 				somethingChanged = true;
 			}
 		} else if (downPressed) {
-			if (getY() < MainPanel.theTileGrid.binaryMap[0].length-1 && MainPanel.theTileGrid.binaryMap[getX()][getY() + 1] != 1) {
+			if (this.y < MainPanel.theTileGrid.binaryMap[0].length-1 && MainPanel.theTileGrid.binaryMap[this.x][this.y + 1] != 1) {
 				this.y += 1;
 				somethingChanged = true;
 			}
 		} else if (rightPressed) {
-			if (getX() < MainPanel.theTileGrid.binaryMap.length-1 && MainPanel.theTileGrid.binaryMap[getX() + 1][getY()] != 1) {
+			if (this.x < MainPanel.theTileGrid.binaryMap.length-1 && MainPanel.theTileGrid.binaryMap[this.x + 1][this.y] != 1) {
 				this.x += 1;
 				somethingChanged = true;
 			}
 		} else if (leftPressed) {
-			if (getX() > 0 && MainPanel.theTileGrid.binaryMap[getX() - 1 ][getY()] != 1){
+			if (this.x > 0 && MainPanel.theTileGrid.binaryMap[this.x - 1 ][this.y] != 1){
 				this.x -= 1;
 				somethingChanged = true;
 			}
@@ -51,27 +45,26 @@ public class Character { //mother class of Hero and UFO
 		return somethingChanged;	
 	}
 
-
+	/** removes and adds walls, according to the tiles clicked
+	  */
 	public boolean updateWalls (){
 		boolean somethingChanged = false; 
 		if(MainPanel.recentlyClicked){
 			int x = (int)((MainPanel.mouseX-200)/20); //gets the coordinates of the mouse (stored in MainPanel) and converts them into the index of the tile
 			int y = (int)((MainPanel.mouseY-20)/20);
 
-			if(0<=x && x<=30 && y>=0 && y<=30 && !MainPanel.firstSelected){ //the boolean firstSelected is true when the wall to move has been selected
+			//to select the wall to be moved
+			if(0<=x && x<=30 && y>=0 && y<=30 && !MainPanel.firstSelected){ //the boolean firstSelected is false when the wall to move has yet to be selected
 				if(MainPanel.theTileGrid.binaryMap[x][y] ==1){
 					MainPanel.theTileGrid.binaryMap[x][y]=0;
 					MainPanel.theTileGrid.map[x][y]=new Ground(20*x+200,20*y+20,20,20);
 					MainPanel.firstSelected=true;
 				}
-			} else if(0<=x && x<=30 && y>=0 && y<=30 && MainPanel.firstSelected){
-				System.out.println("entrée dans la boucle de conditions de coordonnées second"); 
-				boolean p1Pos = (x==MainPanel.player1.getX() && y==MainPanel.player1.getY()); //return true if the case clicked is the case where the Hero is
-				System.out.println("player1" + p1Pos);
-				boolean p2Pos = (x==MainPanel.player2.getX() && y==MainPanel.player2.getY()); //same but for the Ufo
-				System.out.println("player2" + p2Pos);
-				if(MainPanel.theTileGrid.binaryMap[x][y] ==0 && !p1Pos && !p2Pos){
-					System.out.println("entrée dans la boucle de condition binaryMap second");
+			//to select where to put the wall back
+			} else if(0<=x && x<=30 && y>=0 && y<=30 && MainPanel.firstSelected){ 
+				boolean p1Pos = (x==MainPanel.player1.x && y==MainPanel.player1.y); //returns true if the case clicked is the case where the Hero is
+				boolean p2Pos = (x==MainPanel.player2.x && y==MainPanel.player2.y); //same but for the Ufo
+				if(MainPanel.theTileGrid.binaryMap[x][y] ==0 && !p1Pos && !p2Pos){ //so that we cannot place a wall on a character or on an existing wall
 					MainPanel.theTileGrid.binaryMap[x][y]=1;
 					MainPanel.theTileGrid.map[x][y]=new Wall(20*x+200,20*y+20,20,20);
 					MainPanel.firstSelected=false;
@@ -86,11 +79,13 @@ public class Character { //mother class of Hero and UFO
 		return somethingChanged;
 	}
 
+	/** Checks if a key has been pressed and stores the information in the attributes
+	  */
 	public void KeyPressed(){
 		if(player == 1) { // controls for Hero
 			
-			upPressed = KeyHandler.isUpPressed();
-			downPressed = KeyHandler.isDownPressed();
+			upPressed = KeyHandler.isUpPressed(); //since these are static attributes we can access them here
+			downPressed = KeyHandler.isDownPressed(); 
 			leftPressed = KeyHandler.isLeftPressed();
 			rightPressed = KeyHandler.isRightPressed();
 		  
